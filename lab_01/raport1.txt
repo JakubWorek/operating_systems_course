@@ -1,0 +1,124 @@
+jakub@JAKUBWOREK-UBUNTU:/media/jakub/Data/DEV/SYSOPY/lab_0/countdown$ make all
+gcc -Wall -o countdown countdown.c
+jakub@JAKUBWOREK-UBUNTU:/media/jakub/Data/DEV/SYSOPY/lab_0/countdown$ ./countdown
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+jakub@JAKUBWOREK-UBUNTU:/media/jakub/Data/DEV/SYSOPY/lab_0/countdown$ make clean
+rm -f countdown
+jakub@JAKUBWOREK-UBUNTU:/media/jakub/Data/DEV/SYSOPY/lab_0/countdown$ make clean
+rm -f countdown
+jakub@JAKUBWOREK-UBUNTU:/media/jakub/Data/DEV/SYSOPY/lab_0/countdown$ make debugcountdown
+gcc -Wall -g -o countdown countdown.c
+jakub@JAKUBWOREK-UBUNTU:/media/jakub/Data/DEV/SYSOPY/lab_0/countdown$ gdb countdown
+GNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from countdown...
+(gdb) break 7
+Breakpoint 1 at 0x115e: file countdown.c, line 7.
+(gdb) 
+Note: breakpoint 1 also set at pc 0x115e.
+Breakpoint 2 at 0x115e: file countdown.c, line 7.
+(gdb) run
+Starting program: /media/jakub/Data/DEV/SYSOPY/lab_0/countdown/countdown 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) print i
+$1 = 10
+(gdb) continue
+Continuing.
+10
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+9
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+8
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+7
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+6
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+5
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) print i
+$2 = 4
+(gdb) continue
+Continuing.
+4
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+3
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+2
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+1
+
+Breakpoint 1, main () at countdown.c:7
+7               printf("%d\n", i);
+(gdb) continue
+Continuing.
+0
+[Inferior 1 (process 7579) exited normally]
+(gdb) Quit
+(gdb) Quit
+(gdb) Quit
+(gdb) Quit
+(gdb) 
+The program is not being run.
+(gdb) exit

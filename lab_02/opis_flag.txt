@@ -1,0 +1,39 @@
+collatz_static: collatz.c
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/$@ -c $<
+	ar rcs $(BUILD_DIR)/lib$@.a $(BUILD_DIR)/$@
+
+collatz_shared: collatz.c
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -fPIC -o $(BUILD_DIR)/$@.o -c $<
+	$(CC) -shared -o $(BUILD_DIR)/lib$@.so $(BUILD_DIR)/$@.o
+
+clean:
+	rm -rf $(BUILD_DIR)
+
+	-c tylko kompiluj, nie linkuj
+	ar pakuje wynik kompilacji do archiwum .a
+	rcs replace jeżeli istnieje, create jeżeli nie, s updatuje indexy w archiwum
+	-fPIC tworzy Position Indexed Code który jest dostępny i może być ładowany dynamicznie przy uruchomieniu programu
+	-shared tworzy udostępniany obiekt
+
+client_static: client_static.c
+	mkdir -p $(BUILD_DIR)
+	make -C collatzlib collatz_static
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/$@ $< collatzlib/build/libcollatz_static.a
+
+client_shared_so: client_shared_so.c
+	mkdir -p $(BUILD_DIR)
+	make collatz_shared -C collatzlib
+	$(CC) $(CFLAGS) -L ./collatzlib/build $< -lcollatz_shared -Wl,-rpath=./collatzlib/build -o $(BUILD_DIR)/$@ 
+
+client_shared_dlopen: client_shared_dlopen.c
+	mkdir -p $(BUILD_DIR)
+	make collatz_shared -C collatzlib
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/$@ $< -ldl
+
+	-L to ścieżka gdzie znajduje się linkowana biblioteka
+	-lcollatz_shared specyfikuje biblioteke której -L szuka
+	-Wl opcje dla linkera
+	-Wl, -rpath dzięki temu program wie gdzie szukać pliku .so
+	-ldl flaga do linkowania libdl używanej przez dlopen

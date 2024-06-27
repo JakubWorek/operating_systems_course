@@ -1,0 +1,9 @@
+
+Reverse bytes
+Small file time:  0.00
+Medium file time:  0.00
+Large file time:  0.01
+Reverse block
+Small file time:  0.00
+Medium file time:  0.00
+Large file time:  0.00
